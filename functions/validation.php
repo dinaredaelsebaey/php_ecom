@@ -14,12 +14,11 @@ function validateName($name) {
     // validation email
     
 function validateEmail($email){
-    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
        return true;
       }else {
         $_SESSION['message'] = "Please enter a valid email address.";
-        header("Location: ../register.php");
-        exit();
+        return false;
       }
 }
 
