@@ -9,33 +9,21 @@ $host = "localhost";
 $username = "root";
 $password = "";
 $database = "php_ecom";
-
 $conn = mysqli_connect($host,$username,$password,$database);
+
 if(!$conn){
     die("connection failed" . mysqli_connect_error());
 }
 
-
-
-if(isset($_POST["submit"]))
-{
-    $name =trim(htmlspecialchars($_POST["name"]));
+if (isset($_POST["submit"])) {
+    $name = $_POST["name"];
     $email = trim(htmlspecialchars($_POST["email"]));
     $phone = trim(htmlspecialchars($_POST["phone"]));
     $password = trim(htmlspecialchars($_POST["password"]));
     $cpassword = trim(htmlspecialchars($_POST["cpassword"]));
-
-    // // validation name
-    // $name=validateName($name);
-    // // validation email
-    // if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-    //     $_SESSION['message'] = "The email address '$email' is not valid.";
-    //     header('location: register.php ');
-    //   } else {
-    //     return true;
-        
-    //   }
-    
+  if (validateName($name)) {
+      $name = trim(htmlspecialchars($name));
+          
     //check email exists or not
     $check_email_query ="SELECT email from users Where email='$email' ";
     $check_email_query_result =mysqli_query($conn, $check_email_query);
@@ -53,6 +41,7 @@ if(isset($_POST["submit"]))
             {
               $_SESSION['message']= 'Data inserted successfully.';
                 header("Location: ../login.php");
+                exit();
             }else 
             {
                 $_SESSION['message']= 'something wrong occure';
@@ -64,7 +53,20 @@ if(isset($_POST["submit"]))
             header('location: ../register.php ');
         }
 
-      }       
+      } 
+      
+  } else {
+      echo $_SESSION['message'];
+      header("Location: ../register.php");
+      exit();
+  }
+  //$name = trim(htmlspecialchars($_POST["name"]));
+ 
+  
+    
+
+
+      
           
 }elseif(isset($_POST["login"]))
 {
@@ -81,9 +83,6 @@ if(isset($_POST["submit"]))
           $row = mysqli_fetch_array($login_query_result);
           $name = $row['name'];
           $email = $row['email'];
-          // echo $row['password'];
-          // echo $row['name'];
-          // echo $row['email'];
           
           //Check if the password is correct
           if($password == $row['password'])
@@ -93,8 +92,10 @@ if(isset($_POST["submit"]))
             $_SESSION['email']=$email;
             $_SESSION['name']=$name;
             
-            header("Location: ../index.php");
+            
             $_SESSION['message']= 'login successfully.';
+            header("Location: ../index.php");
+            exit();
           }else{
             $_SESSION['message']= 'invalid password';
             header("Location: ../login.php");
