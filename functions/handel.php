@@ -16,43 +16,44 @@ if(!$conn){
 }
 
 if (isset($_POST["submit"])) {
-    $name = trim(htmlspecialchars($name));
+    $name = $_POST["name"];
     $email = trim(htmlspecialchars($_POST["email"]));
     $phone = trim(htmlspecialchars($_POST["phone"]));
     $password = trim(htmlspecialchars($_POST["password"]));
     $cpassword = trim(htmlspecialchars($_POST["cpassword"]));
-  if (validateName($name)) {
     
-      // $name = trim(htmlspecialchars($name));     
-      //check email exists or not
-      $check_email_query ="SELECT email from users Where email='$email' ";
-      $check_email_query_result =mysqli_query($conn, $check_email_query);
+  if(validateName($name)){
+        $name = trim(htmlspecialchars($name));     
+        //check email exists or not
+        $check_email_query ="SELECT email from users Where email='$email' ";
+        $check_email_query_result =mysqli_query($conn, $check_email_query);
 
-      if(mysqli_num_rows($check_email_query_result) > 0)
-      {
-        $_SESSION['message']= 'email already exists.';
-        header("Location: ../register.php");
-      }else{
-        if ($password == $cpassword) 
+        if(mysqli_num_rows($check_email_query_result) > 0)
         {
+          $_SESSION['message']= 'email already exists.';
+          header("Location: ../register.php");
+        }else{
+
+            if ($password == $cpassword) 
+            {
               $query = "INSERT INTO users (name, email, phone, password) VALUES ('$name', '$email', '$phone', '$password')";
               $result = mysqli_query($conn, $query);
               if ($result)
               {
                 $_SESSION['message']= 'Data inserted successfully.';
-                  header("Location: ../login.php");
-                  exit();
+                header("Location: ../login.php");
+                exit();
               }else 
               {
-                  $_SESSION['message']= 'something wrong occure';
-                  header("Location: ../register.php");
+                $_SESSION['message']= 'something wrong occure';
+                header("Location: ../register.php");
               }
-          }else
-          {
+            }else
+            {
               $_SESSION['message'] = "The password don't match.";
               header('location: ../register.php ');
-          }
-
+            }
+          
         } 
       
   } else {
