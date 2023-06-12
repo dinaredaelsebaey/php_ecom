@@ -2,23 +2,16 @@
 include_once "handel.php";
 
 
+    
 function validateName($name) {
-    if (!empty($name) && strlen($name) >= 2) {
-      
+    if (!empty($name) && ctype_alpha(str_replace(' ', '', $name))) {
         return true;
-        
-    } elseif(!ctype_alpha($name)){
-      
-      $_SESSION['message'] = "Please enter string name .";
-      return false;
-    }
-    else {
-  
-        $_SESSION['message'] = "Please enter a name with more than 2 characters.";
+    } else {
+        $_SESSION['message'] = "Please enter a non-empty name without numeric characters.";
         return false;
     }
   }
-    
+    // validation email
     
 function validateEmail($email){
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
