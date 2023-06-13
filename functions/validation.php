@@ -18,7 +18,7 @@ function validateEmail($email)
     if (filter_var($email, FILTER_VALIDATE_EMAIL))
     {
        return true;
-    }else 
+    }else
     {
         $_SESSION['message'] = "Please enter a valid email address.";
         return false;
@@ -31,7 +31,7 @@ function validatePassword($password)
         $_SESSION['message'] = "password is required";
         return false;
     }
-    else if(strlen($password)<3)
+    elseif(strlen($password)<3)
     {
         $_SESSION['message'] = "password is min 3 char";
         return false;
@@ -39,6 +39,17 @@ function validatePassword($password)
     else
     {
         return true;
+    }
+}
+function validatePhoneNumber($phoneNumber)
+{
+    $phoneNumber = preg_replace('/[^0-9]/', '', $phoneNumber);
+
+    if (preg_match('/^[01][0-9]{10}$/', $phoneNumber)) {
+        return true;
+    } else {
+        $_SESSION['message'] = "please enter phone number from 11 digit";
+        return false;
     }
 }
 

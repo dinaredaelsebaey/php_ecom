@@ -15,6 +15,11 @@ if(!$conn){
     die("connection failed" . mysqli_connect_error());
 }
 
+$registePage ='../register.php';
+$loginPage ='../login.php';
+
+
+
 if (isset($_POST["submit"])) {
     $name = $_POST["name"];
     $email = trim(htmlspecialchars($_POST["email"]));
@@ -22,10 +27,9 @@ if (isset($_POST["submit"])) {
     $password = trim(htmlspecialchars($_POST["password"]));
     $cpassword = trim(htmlspecialchars($_POST["cpassword"]));
     
-  if(validateName($name) && validateEmail($email) && validatePassword($password)){
+  if(validateName($name) && validateEmail($email) && validatePassword($password) && validatePhoneNumber($phone)){
     
         $name = trim(htmlspecialchars($name));
-
           //check email exists or not
           $check_email_query ="SELECT email from users Where email='$email' ";
           $check_email_query_result =mysqli_query($conn, $check_email_query);
@@ -33,7 +37,7 @@ if (isset($_POST["submit"])) {
           if(mysqli_num_rows($check_email_query_result) > 0)
           {
             $_SESSION['message']= 'email already exists.';
-            header("Location: ../register.php");
+            header("Location: ". $registePage);
           }else
           {
             
@@ -45,24 +49,21 @@ if (isset($_POST["submit"])) {
                 if ($result)
                 {
                   $_SESSION['message']= 'Data inserted successfully.';
-                  header("Location: ../login.php");
+                  header("Location: " .$loginPage);
                   exit();
-                }else 
+                }else
                 {
                   $_SESSION['message']= 'something wrong occure';
-                  header("Location: ../register.php");
+                  header("Location: ". $registePage);
                 }
-              
             }else
               {
                 $_SESSION['message'] = "The password don't match.";
-                header('location: ../register.php ');
-              }  
-             
-          
+                header('location: ' . $loginPage);
+              }
   } }else {
       echo $_SESSION['message'];
-      header("Location: ../register.php");
+      header("Location: ". $registePage);
       exit();
   }
         
@@ -75,8 +76,7 @@ if (isset($_POST["submit"])) {
       $login_query_result =mysqli_query($conn, $login_query);
       
       if(mysqli_num_rows($login_query_result) > 0)
-      {   
-        
+      {
          // Get the user's data
           $row = mysqli_fetch_array($login_query_result);
           
@@ -98,12 +98,12 @@ if (isset($_POST["submit"])) {
             exit();
           }else{
             $_SESSION['message']= 'invalid password';
-            header("Location: ../login.php");
+            header("Location: " . $loginPage);
           }
-      }else 
+      }else
       {
           $_SESSION['message']= 'invalid email';
-          header("Location: ../login.php");
+          header("Location: " . $loginPage);
        }
     
   }
