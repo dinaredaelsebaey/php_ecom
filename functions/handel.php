@@ -22,10 +22,10 @@ if (isset($_POST["submit"])) {
     $password = trim(htmlspecialchars($_POST["password"]));
     $cpassword = trim(htmlspecialchars($_POST["cpassword"]));
     
-  if(validateName($name)){
-        $name = trim(htmlspecialchars($name));     
-        if(validateEmail($email)){
-          
+  if(validateName($name) && validateEmail($email) && validatePassword($password)){
+    
+        $name = trim(htmlspecialchars($name));
+
           //check email exists or not
           $check_email_query ="SELECT email from users Where email='$email' ";
           $check_email_query_result =mysqli_query($conn, $check_email_query);
@@ -36,7 +36,8 @@ if (isset($_POST["submit"])) {
             header("Location: ../register.php");
           }else
           {
-              if ($password == $cpassword) 
+            
+              if ($password == $cpassword)
               {
                 $password =password_hash($password, PASSWORD_BCRYPT);
                 $query = "INSERT INTO users (name, email, phone, password) VALUES ('$name', '$email', '$phone', '$password')";
@@ -51,14 +52,15 @@ if (isset($_POST["submit"])) {
                   $_SESSION['message']= 'something wrong occure';
                   header("Location: ../register.php");
                 }
-              }else
+              
+            }else
               {
                 $_SESSION['message'] = "The password don't match.";
                 header('location: ../register.php ');
               }  
-          } 
-      }   
-  } else {
+             
+          
+  } }else {
       echo $_SESSION['message'];
       header("Location: ../register.php");
       exit();

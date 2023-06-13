@@ -31,9 +31,9 @@ function validatePassword($password)
         $_SESSION['message'] = "password is required";
         return false;
     }
-    else if(strlen($password)<6)
+    else if(strlen($password)<3)
     {
-        $_SESSION['message'] = "password is min 5 char";
+        $_SESSION['message'] = "password is min 3 char";
         return false;
     }
     else
