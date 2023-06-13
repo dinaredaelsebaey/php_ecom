@@ -36,9 +36,9 @@ if (isset($_POST["submit"])) {
             header("Location: ../register.php");
           }else
           {
-
               if ($password == $cpassword) 
               {
+                $password =password_hash($password, PASSWORD_BCRYPT);
                 $query = "INSERT INTO users (name, email, phone, password) VALUES ('$name', '$email', '$phone', '$password')";
                 $result = mysqli_query($conn, $query);
                 if ($result)
@@ -63,14 +63,7 @@ if (isset($_POST["submit"])) {
       header("Location: ../register.php");
       exit();
   }
-  //$name = trim(htmlspecialchars($_POST["name"]));
- 
-  
-    
-
-
-      
-          
+        
 }elseif(isset($_POST["login"]))
 {
       $email = trim(htmlspecialchars($_POST["email"]));
@@ -84,11 +77,13 @@ if (isset($_POST["submit"])) {
         
          // Get the user's data
           $row = mysqli_fetch_array($login_query_result);
+          
           $name = $row['name'];
           $email = $row['email'];
+          $hashedPasswordFromDatabase = $row['password'];
           
-          //Check if the password is correct
-          if($password == $row['password'])
+          //Check if the hashedpassword is matches entered password
+          if(password_verify($password, $hashedPasswordFromDatabase))
           {
             $_SESSION['loggedin'] =true;
             // Set session variables
