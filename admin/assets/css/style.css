@@ -1,0 +1,4 @@
+.card-body .form-control{
+    border: 1px solid black !important;
+    padding: 8px 10px;
+}
