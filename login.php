@@ -7,7 +7,6 @@ if(isset($_SESSION['loggedin'])){
     header('Location: index.php');
     exit();
 }
-
 ?>
 <div class="py-5">
     <div class="container">

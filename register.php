@@ -2,11 +2,11 @@
 include "includes/header.php";
 include_once "./functions/handel.php";
 
-if(isset($_SESSION['loggedin'])){
-    $_SESSION['message']="you are already login";
-    header('Location: index.php');
-    exit();
-}
+// if(isset($_SESSION['loggedin'])){
+//     $_SESSION['message']="you are already login";
+//     header('Location: index.php');
+//     exit();
+// }
 ?>
 <div class="py-5">
     <div class="container">

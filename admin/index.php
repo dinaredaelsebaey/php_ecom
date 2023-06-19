@@ -1,9 +1,11 @@
-<?php include_once('includes/header.php');?>
+<?php
+ include_once('includes/header.php');
+ include_once('../middleware/adminMiddleware.php');
+ ?>
 
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-
             <div class="row mt-4">
                 <div class="col-lg-7 position-relative z-index-2">
                     <div class="card card-plain mb-4">
@@ -90,19 +92,13 @@
                                     <p class="mb-0 ">Just updated</p>
                                 </div>
                             </div>
-
                         </div>
                     </div>
-
-
                 </div>
             </div>
-
-
         </div>
     </div>
-
 </div>
-</div>
-</div>
+<!-- </div>
+</div> -->
 <?php include_once('includes/footer.php');?>

@@ -19,7 +19,7 @@ class Database{
         die("connection failed" . mysqli_connect_error());
       }
     }
-    public function getConnecrion()
+    public function getConnection()
     {
       return $this->conn;
     }
@@ -56,20 +56,15 @@ class User
     }
     public function insertUserData($conn)
     {
-      // $name = trim(htmlspecialchars($this->name));
-      // $email = trim(htmlspecialchars($this->email));
-      // $phone = trim(htmlspecialchars($this->phone));
-      // $password = trim(htmlspecialchars($this->password));
-
       $name = mysqli_real_escape_string($conn, $this->name);
       $email = mysqli_real_escape_string($conn, $this->email);
       $phone = mysqli_real_escape_string($conn, $this->phone);
       $password = mysqli_real_escape_string($conn, $this->password);
 
-      $check_email_query ="SELECT email from users Where email='$email' ";
-      $check_email_query_result =mysqli_query($conn, $check_email_query);
+      $checkEmailQuery ="SELECT email from users Where email='$email' ";
+      $checkEmailQueryResult = mysqli_query($conn, $checkEmailQuery);
 
-          if(mysqli_num_rows($check_email_query_result) > 0)
+          if(mysqli_num_rows($checkEmailQueryResult) > 0)
           {
             $_SESSION['message']= 'email already exists.';
             header("Location: ../register.php");
@@ -125,6 +120,7 @@ class Login
             $name = $row['name'];
             $email = $row['email'];
             $hashedPasswordFromDatabase = $row['password'];
+            $is_admin = $row['is_admin'];
             
             //Check if the hashedpassword is matches entered password
             if(password_verify($password, $hashedPasswordFromDatabase))
@@ -133,22 +129,39 @@ class Login
               // Set session variables
               $_SESSION['email']=$email;
               $_SESSION['name']=$name;
-              $_SESSION['message']= 'login successfully.';
-              header("Location: ../index.php");
-              exit();
-            }else{
+              $_SESSION['is_admin']= $is_admin;
+              //if user is admin diect to dashboard
+                if($is_admin == 1)
+                {
+                  $_SESSION['message']= 'welcome to dashboard.';
+                  header("Location: ../admin/index.php");
+                }
+                else
+                {
+                  $_SESSION['message']= 'login successfully.';
+                  header("Location: ../index.php");
+                  exit();
+                }
+            }else
+            {
               $_SESSION['message']= 'invalid password';
               header("Location: ../login.php");
             }
+        }
+        else
+        {
+          $_SESSION['message']= 'email is not exist';
+          header("Location: ../login.php");
+          exit();
         }
     }
 }
 
 $database =new Database();
-$conn = $database->getConnecrion();
+$conn = $database->getConnection();
 
-
-if (isset($_POST["submit"])) {
+if (isset($_POST["submit"]))
+{
     $name = $_POST["name"];
     $email = trim(htmlspecialchars($_POST["email"]));
     $phone = trim(htmlspecialchars($_POST["phone"]));
@@ -159,16 +172,18 @@ if (isset($_POST["submit"])) {
     if($user->validateAll())
     {
       $user->insertUserData($conn);
-    }else {
+    }else
+    {
       echo $_SESSION['message'];
       header("Location: ../register.php");
       exit();
-  }
+    }
         
-}elseif(isset($_POST["login"]))
+}elseif (isset($_POST["login"]))
 {
       $email = trim(htmlspecialchars($_POST["email"]));
       $password = trim(htmlspecialchars($_POST["password"]));
+      
       $login = new Login($email,$password);
       $login->authenticate($conn);
 }

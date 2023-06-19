@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,7 +11,7 @@
         Php Ecommerce
     </title>
     <!--     Fonts and icons     -->
-    <link rel="stylesheet" type="text/css"
+    <link rel=" stylesheet" type="text/css"
         href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
     <!-- Font Awesome Icons -->
     <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
@@ -22,8 +25,9 @@
 
     <!-- include -->
     <?php
-     include('sidebar.php');
+     include_once 'sidebar.php';
     ?>
-    <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg "> <?php
-     include('navbar.php');
+    <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
+        <?php
+     include_once 'navbar.php';
     ?>
