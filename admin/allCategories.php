@@ -37,7 +37,7 @@ include_once "../functions/handelRegisterAndLogin.php";
                                 <td><?= $category["name"]; ?></td>
                                 <td><?= $category["description"]; ?></td>
                                 <td>
-                                    <img src="upload/ <?= $category["image"];?>" width="50px" height="50px"
+                                    <img src="upload/<?= $category["image"];?>" width="50px" height="50px"
                                         alt="<?= $category["name"]; ?>">
                                 </td>
                                 <td><?= $category["status"]; ?></td>

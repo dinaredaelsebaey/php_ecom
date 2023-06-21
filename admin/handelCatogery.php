@@ -14,21 +14,25 @@ include_once "../functions/handelRegisterAndLogin.php";
         $meta_description = $_POST['meta_description'] ;
         $meta_keywords = $_POST['meta_keywords'] ;
 
-
+       
+        //var_dump($image);
+        // die();
+        
             //extract image details
-        $img_Name=$image['name'];
+        $img_name=$image['name'];
         $img_type=$image['type'];
         $img_tmp_name=$image['tmp_name'];
         $img_size=$image['size'];
         $img_error=$image['error'];
 
             //validation image file
-        $extension_array = array('png','PNG', 'jpg','JPG');
-        $img_ext = pathinfo($img_Name, PATHINFO_EXTENSION);
+        // $extension_array = array('png','PNG', 'jpg','JPG');
+        
+        $img_ext = pathinfo($img_name, PATHINFO_EXTENSION);
+        // rename image to prevent overirde if 2 image have the same name
         $random_img_name = uniqid(). "." . $img_ext;
-
-        //////store image in db//////
-        move_uploaded_file($img_tmp_name,"upload/$img_Name");
+        //////move image from temp to upload folder //////
+        move_uploaded_file($img_tmp_name,"upload/$random_img_name");
 
          // insert ti db
         $database =new Database();
