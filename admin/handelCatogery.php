@@ -1,6 +1,6 @@
 <?php
 session_start();
-include_once "../functions/handel.php";
+include_once "../functions/handelRegisterAndLogin.php";
 
     if(isset($_POST['add_category_btn']))
     {
@@ -28,7 +28,7 @@ include_once "../functions/handel.php";
         $random_img_name = uniqid(). "." . $img_ext;
 
         //////store image in db//////
-        move_uploaded_file($img_tmp_name,"includes/upload/$img_Name");
+        move_uploaded_file($img_tmp_name,"upload/$img_Name");
 
          // insert ti db
         $database =new Database();

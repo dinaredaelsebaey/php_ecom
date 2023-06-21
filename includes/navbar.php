@@ -33,11 +33,11 @@ session_start();
                 <?php
                  }else{?>
                 <li class="nav-item">
-                    <a class="nav-link" href="register.php">Register</a>
+                    <a class="nav-link" href="registerForm.php">Register</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="login.php">Login</a>
+                    <a class="nav-link" href="loginForm.php">Login</a>
                 </li>
                 <?php
                 }

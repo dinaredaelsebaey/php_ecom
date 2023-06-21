@@ -1,5 +1,5 @@
 <?php
-include_once "handel.php";
+include_once "handelRegisterAndLogin.php";
 
 function validateName($name)
 {
