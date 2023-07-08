@@ -23,6 +23,7 @@ include_once "../functions/handelRegisterAndLogin.php";
                                 <th>Description</th>
                                 <th>Image</th>
                                 <th>Status</th>
+                                <th>Edit</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -41,6 +42,11 @@ include_once "../functions/handelRegisterAndLogin.php";
                                         alt="<?= $category["name"]; ?>">
                                 </td>
                                 <td><?= $category["status"]; ?></td>
+                                <td>
+
+                                    <a href="editCategory.php?id=<?= $category["id"]; ?>"
+                                        class="btn btn-primary">Edit</a>
+                                </td>
                             </tr>
                             <?php
                                 }

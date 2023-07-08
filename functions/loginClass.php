@@ -34,7 +34,7 @@ class Login
                 $_SESSION['email']=$email;
                 $_SESSION['name']=$name;
                 $_SESSION['is_admin']= $is_admin;
-                //if user is admin diect to dashboard
+                
                 if($_SESSION['is_admin'] == 1)
                 {
                     $_SESSION['message']= 'welcome to dashboard.';
