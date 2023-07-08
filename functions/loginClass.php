@@ -23,7 +23,8 @@ class Login
             $name = $row['name'];
             $email = $row['email'];
             $hashedPasswordFromDatabase = $row['password'];
-            $is_admin = $row['is_admin'];
+            //$is_admin = $row['is_admin'];
+            $is_admin = isset($_POST['is_admin']) ? 1 : 0;
 
             //Check if the hashedpassword is matches entered password
             if(password_verify($password, $hashedPasswordFromDatabase))
@@ -34,7 +35,7 @@ class Login
                 $_SESSION['name']=$name;
                 $_SESSION['is_admin']= $is_admin;
                 //if user is admin diect to dashboard
-                if($is_admin == 1)
+                if($_SESSION['is_admin'] == 1)
                 {
                     $_SESSION['message']= 'welcome to dashboard.';
                     header("Location: ../admin/index.php");

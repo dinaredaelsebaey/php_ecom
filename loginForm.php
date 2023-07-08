@@ -36,7 +36,12 @@ if(isset($_SESSION['loggedin'])){
                                 <input type="password" name="password" placeholder="enter your password"
                                     class="form-control" id="exampleInputPassword1">
                             </div>
-
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="1" name="is_admin" id="is_admin">
+                                <label class="form-check-label" for="is_admin">
+                                    Is Admin
+                                </label>
+                            </div>
                             <button type="submit" name="login" class="btn btn-primary">Login</button>
                         </form>
                     </div>

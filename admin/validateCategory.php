@@ -38,6 +38,7 @@ function validate_description($description)
 
 function validate_image($image)
 {
+    //extract image details
     $img_name = $image['name'];
     $img_type = $image['type'];
     $img_tmp_name = $image['tmp_name'];
@@ -50,14 +51,17 @@ function validate_image($image)
     {
         $_SESSION['message'] = 'There was an error uploading the image.';
         return false;
+        
     } elseif ($img_size > 2000000)
     {
         $_SESSION['message'] = 'Image size exceeds 2MB';
         return false;
+        
     } elseif (!in_array($img_ext, $extension_array))
     {
         $_SESSION['message'] = 'Invalid file type. Image must be in PNG or JPG format.';
         return false;
+        
     } else
     {
         //rename image to prevent override if 2 images have the same name

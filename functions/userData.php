@@ -1,7 +1,7 @@
 <?php
 class User 
-{ private $name ; private $email ; private $phone ; private $password ; private $cpassword ; public
-    function __construct($name, $email, $phone, $password, $cpassword) { $this->name = $name;
+{ private $name ; private $email ; private $phone ; private $password ; private $cpassword ;
+        public function __construct($name, $email, $phone, $password, $cpassword) { $this->name = $name;
         $this->email = $email;
         $this->phone = $phone;
         $this->password = $password;
