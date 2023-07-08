@@ -35,6 +35,7 @@ $conn = $database->getConnection();
                     <form action="handelCatogery.php" method="Post" enctype="multipart/form-data">
                         <div class="row">
                             <div class="col-md-6">
+                                <input type="hidden" name="category_id" value="<?= $category['id'] ?>">
                                 <label for="">Name</label>
                                 <input type="text" name="name" value="<?= $category['name'] ?>"
                                     placeholder="Enter Category name" class="form-control">
@@ -52,6 +53,7 @@ $conn = $database->getConnection();
                             <div class="col-md-6">
                                 <label for="">Upload Image</label>
                                 <input type="file" name="image" class="form-control">
+                                <input type="hidden" name="old_image" value="<?= $category['image'] ?>">
                                 <img src="upload/<?= $category['image'] ?>" alt="<?= $category['name'] ?>" width="50px">
                             </div>
                             <div class="col-md-12">
@@ -78,7 +80,7 @@ $conn = $database->getConnection();
                                 <input type="checkbox" name="popular" <?= $category['popular'] == 1 ? 'checked' : '' ?>>
                             </div>
                             <div>
-                                <button type="submit" name="add_category_btn" class="btn btn-primary">Submit</button>
+                                <button type="submit" name="update_category_btn" class="btn btn-primary">Update</button>
                             </div>
                         </div>
 
