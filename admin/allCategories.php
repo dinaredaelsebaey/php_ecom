@@ -23,7 +23,7 @@ include_once "../functions/handelRegisterAndLogin.php";
                                 <th>Description</th>
                                 <th>Image</th>
                                 <th>Status</th>
-                                <th>Edit</th>
+                                <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -41,11 +41,17 @@ include_once "../functions/handelRegisterAndLogin.php";
                                     <img src="upload/<?= $category["image"];?>" width="50px" height="50px"
                                         alt="<?= $category["name"]; ?>">
                                 </td>
-                                <td><?= $category["status"]; ?></td>
+                                <td><?= $category["status"] =='0' ? "visible" :"hidden"?></td>
                                 <td>
 
                                     <a href="editCategory.php?id=<?= $category["id"]; ?>"
-                                        class="btn btn-primary">Edit</a>
+                                        class="btn btn-secondary">Edit</a>
+
+                                    <form action="handelCatogery.php" method="POST">
+                                        <input type="hidden" name="category_id" value="<?= $category['id'] ?>">
+                                        <button name="delete_category_btn" type="submit" class="btn btn-danger">
+                                            Delete</button>
+                                    </form>
                                 </td>
                             </tr>
                             <?php

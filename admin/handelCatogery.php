@@ -71,7 +71,7 @@ class Category
 
   }
 
-  public function UpdateCategory($conn)
+  public function updateCategory($conn)
   {
         $name = mysqli_real_escape_string($conn, $this->name);
         $slug = mysqli_real_escape_string($conn, $this->slug);
@@ -93,12 +93,12 @@ class Category
               if (file_exists($old_image)) {
                   unlink($old_image);
               }
-          } else {
+          }else {
               $_SESSION['message'] = 'Invalid image file.';
               header("Location: editCategory.php?id=$category_id");
               exit();
           }
-      } else {
+        } else {
           $updatefileName = $old_image;
       }
 
@@ -113,6 +113,37 @@ class Category
     } else {
         $_SESSION['message'] = 'Something went wrong.';
         header("Location: editCategory.php?id=$category_id");
+        exit();
+    }
+
+  }
+
+  public function deleteCategory($conn)
+  {
+        
+        $category_id = mysqli_real_escape_string($conn, $_POST['category_id']);
+        
+        $select_category_query = "SELECT * from categories WHERE id=$category_id";
+        $category_query = mysqli_query($conn, $select_category_query);
+        $category_data=mysqli_fetch_array($category_query);
+        $image = $category_data['image'];
+
+
+       
+    $delete_query = "DELETE from categories WHERE id=$category_id";
+    $result = mysqli_query($conn, $delete_query);
+
+    if ($result) {
+      if (file_exists("upload/".$image)) {
+        unlink("upload/".$image);
+    }
+      
+        $_SESSION['message'] = 'Data deleted successfully.';
+        header("Location: allCategories.php");
+        exit();
+    } else {
+        $_SESSION['message'] = 'Something went wrong.';
+        header("Location: allCategories");
         exit();
     }
 
@@ -148,26 +179,32 @@ if(isset($_POST['add_category_btn']))
 }
 elseif(isset($_POST['update_category_btn']))
 {
-      $category_id=$_POST['category_id'];
-      $name = $_POST['name'] ;
-        $slug = $_POST['slug'] ;
-        $description = $_POST['description'] ;
-        $status = isset($_POST['status'] )? '1' : '0' ;
-        $popular = isset($_POST['popular']) ? '1' : '0' ;
-        $meta_title = $_POST['meta_title'] ;
-        $meta_description = $_POST['meta_description'] ;
-        $meta_keywords = $_POST['meta_keywords'] ;
-
-        $new_image=$_FILES['image'];
-        $old_image=$_POST['old_image'];
-        if($new_image !="")
-        {
-          $updatefileName= $new_image;
-        }else{
-          $updatefileName= $old_image;
-        }
+    $category_id=$_POST['category_id'];
+    $name = $_POST['name'] ;
+    $slug = $_POST['slug'] ;
+    $description = $_POST['description'] ;
+    $status = isset($_POST['status'] )? '1' : '0' ;
+    $popular = isset($_POST['popular']) ? '1' : '0' ;
+    $meta_title = $_POST['meta_title'] ;
+    $meta_description = $_POST['meta_description'] ;
+    $meta_keywords = $_POST['meta_keywords'] ;
+    $new_image=$_FILES['image'];
+    $old_image=$_POST['old_image'];
+        
+        // if($new_image !="")
+        // {
+        //   $updatefileName= $new_image;
+        // }else{
+        //   $updatefileName= $old_image;
+        // }
         $category = new Category($name,$slug,$description,$status,$popular,$updatefileName,$meta_title,$meta_description,$meta_keywords);
-        $category->UpdateCategory($conn);
+        $category->updateCategory($conn);
+}
+elseif(isset($_POST['delete_category_btn']))
+{
+    $category_id=$_POST['category_id'];
+    $category = new Category($name,$slug,$description,$status,$popular,$image,$meta_title,$meta_description,$meta_keywords);
+    $category->deleteCategory($conn);
 }
 
 
