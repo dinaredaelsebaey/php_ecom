@@ -4,6 +4,7 @@
  include_once '../config/db.php';
  include_once '../config/categoryDb.php';
 
+
 $database =new Database();
 $conn = $database->getConnection();
 ?>
@@ -22,10 +23,10 @@ $conn = $database->getConnection();
              if(isset($_GET['id']))
              { 
                 $id = $_GET['id'];
-                $sql = "SELECT * FROM categories WHERE id = $id";
-                $result = mysqli_query($conn, $sql);
-                if(mysqli_num_rows($result) > 0) {
-                    $category = mysqli_fetch_assoc($result);
+                $categories_table = "categories";
+                $categories = selectCategoryId($categories_table,$id);
+                if(mysqli_num_rows($categories) > 0) {
+                    $category = mysqli_fetch_assoc($categories);
             ?>
             <div class="card">
                 <div class="card-header">

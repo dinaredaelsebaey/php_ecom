@@ -1,11 +1,12 @@
 <?php 
  include_once('includes/header.php');
 include_once "../functions/handelRegisterAndLogin.php";
+include_once '../config/db.php';
+include_once '../config/categoryDb.php';
 
     $database =new Database();
     $conn = $database->getConnection();
-    $sql = "SELECT * FROM categories";
-    $categories = mysqli_query($conn, $sql);
+
 ?>
 <div class="container">
     <div class="row">
@@ -28,6 +29,8 @@ include_once "../functions/handelRegisterAndLogin.php";
                         </thead>
                         <tbody>
                             <?php 
+                                $categories_table = "categories";
+                                $categories = selectAllCategories($categories_table);
                                 if (mysqli_num_rows($categories) > 0)
                                 {
                                     foreach($categories as $category)
