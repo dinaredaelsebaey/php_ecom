@@ -51,7 +51,7 @@ include_once '../config/productDb.php';
                                         class="btn btn-secondary">Edit</a>
 
                                     <form action="handelProduct.php" method="POST">
-                                        <input type="hidden" name="category_id" value="<?= $category['id'] ?>">
+                                        <input type="hidden" name="product_id" value="<?= $product['id'] ?>">
                                         <button name="delete_product_btn" type="submit" class="btn btn-danger">
                                             Delete</button>
                                     </form>

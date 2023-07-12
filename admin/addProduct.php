@@ -84,7 +84,7 @@ $conn = $database->getConnection();
                             </div>
                             <div class="col-md-6">
                                 <label for="">Quantity:</label>
-                                <input type="text" required name="quantity" placeholder="Enter Quantity"
+                                <input type="number" required name="quantity" placeholder="Enter Quantity"
                                     class="form-control">
                             </div>
                             <div class="col-md-6">
