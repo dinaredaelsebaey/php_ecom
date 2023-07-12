@@ -99,7 +99,7 @@ class Product
     $old_image = mysqli_real_escape_string($conn, $_POST['old_image']);
     $new_image = $_FILES['image'];
 
-    $updatefileName = ''; // define a default value
+    //$updatefileName = ''; // define a default value
     if ($new_image['size'] > 0) {
       $valid_image = validate_image($new_image);
       if ($valid_image !== false) {
@@ -207,23 +207,7 @@ elseif(isset($_POST['update_product_btn']))
     $new_image=$_FILES['image'];
     $old_image=$_POST['old_image'];
     
-    $updatefileName = ''; // define a default value
-    if ($new_image['size'] > 0) {
-        $valid_image = validate_image($new_image);
-        if ($valid_image !== false) {
-            $updatefileName = $valid_image;
-            // delete the old image file
-            if (file_exists($old_image)) {
-                unlink($old_image);
-            }
-        } else {
-            $_SESSION['message'] = 'Invalid image file.';
-            header("Location: editProduct.php?id=$product_id");
-            exit();
-        }
-    } else {
-        $updatefileName = $old_image;
-    }
+
         
     $product = new Product($name,$slug,$description,$small_description,$selling_price,$original_price,$status,$quantity,$updatefileName,$meta_title,$meta_description,$meta_keywords);
     $product->updateProduct($conn);
