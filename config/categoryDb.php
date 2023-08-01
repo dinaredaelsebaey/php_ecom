@@ -16,5 +16,11 @@ function selectAllCategories($table)
     $sql = "SELECT * FROM $table";
     return $result = mysqli_query($conn, $sql);
 }
+function selectUserCategory($table)
+{
+    global $conn ;
+    $sql = "SELECT * FROM $table WHERE status = '0' ";
+    return $result = mysqli_query($conn, $sql);
+}
 $database->closeConnection();
 ?>

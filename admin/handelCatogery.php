@@ -74,7 +74,8 @@ class Category
     $name = mysqli_real_escape_string($conn, $this->name);
     $slug = mysqli_real_escape_string($conn, $this->slug);
     $description = mysqli_real_escape_string($conn, $this->description);
-    $status = mysqli_real_escape_string($conn, $this->status);
+    $status = isset($_POST['status']) ? boolval($_POST['status']) : false;
+    $status_value = $status ? 1 : 0;
     $popular = mysqli_real_escape_string($conn, $this->popular);
     $meta_title = mysqli_real_escape_string($conn, $this->meta_title);
     $meta_description = mysqli_real_escape_string($conn, $this->meta_description);
@@ -101,7 +102,7 @@ class Category
   }
 
        
-  $update_query = "UPDATE categories SET name='$name', slug='$slug', description='$description', status='$status', popular='$popular', image='$updatefileName', meta_title='$meta_title', meta_description='$meta_description', meta_keywords='$meta_keywords' WHERE id=$category_id";
+  $update_query = "UPDATE categories SET name='$name', slug='$slug', description='$description', status='$status_value', popular='$popular', image='$updatefileName', meta_title='$meta_title', meta_description='$meta_description', meta_keywords='$meta_keywords' WHERE id=$category_id";
   $result = mysqli_query($conn, $update_query);
 
   if ($result) {

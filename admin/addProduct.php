@@ -89,12 +89,12 @@ $conn = $database->getConnection();
                             </div>
                             <div class="col-md-6">
                                 <label for="">Status</label>
-                                <input type="checkbox" name="status">
+                                <input type="checkbox" name="status" value="1">
                             </div>
-                            <!-- <div class="col-md-6">
+                            <div class="col-md-6">
                                 <label for="">Trending</label>
-                                <input type="checkbox" name="trending">
-                            </div> -->
+                                <input type="checkbox" name="trending" value="1">
+                            </div>
                             <div class="col-md-12">
                                 <label for="">Meta Title</label>
                                 <input type="text" name="meta_title" placeholder="Enter meta title"

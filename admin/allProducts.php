@@ -24,6 +24,7 @@ include_once '../config/productDb.php';
                                 <th>Description</th>
                                 <th>Image</th>
                                 <th>Status</th>
+                                <th>Trending</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -44,7 +45,9 @@ include_once '../config/productDb.php';
                                     <img src="upload/<?= $product["image"];?>" width="50px" height="50px"
                                         alt="<?= $product["name"]; ?>">
                                 </td>
-                                <td><?= $product["status"] =='0' ? "visible" :"hidden"?></td>
+                                <td><?= $product["status"] =='0' ? "hidden" :"visible"?></td>
+                                <td><?= $product["trending"] =='0' ? "hidden" :"visible"?></td>
+
                                 <td>
 
                                     <a href="editProduct.php?id=<?= $product["id"]; ?>"
@@ -52,7 +55,8 @@ include_once '../config/productDb.php';
 
                                     <form action="handelProduct.php" method="POST">
                                         <input type="hidden" name="product_id" value="<?= $product['id'] ?>">
-                                        <button name="delete_product_btn" type="submit" class="btn btn-danger">
+                                        <button onclick="confirmDelete(product_id)" name="delete_product_btn"
+                                            type="submit" class="btn btn-danger">
                                             Delete</button>
                                     </form>
                                 </td>
@@ -73,5 +77,7 @@ include_once '../config/productDb.php';
 <?php
 include_once('../includes/footer.php');
 $database->closeConnection();
+
+
 
 ?>

@@ -14,8 +14,8 @@
 </head>
 
 <body>
-    <!-- <script src="assets/js/jquery-3.7.0.min.js"> </script>
-    <script src="assets/js/bootstrap.bundle.min.js"></script> -->
+
+    <script src="assets/js/deleteProduct.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/js/bootstrap.min.js"></script>
 
 

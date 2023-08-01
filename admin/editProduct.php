@@ -106,6 +106,11 @@ $conn = $database->getConnection();
                                 <label for="">Status</label>
                                 <input type="checkbox" name="status" <?= $product['status'] == 1 ? 'checked' : '' ?>>
                             </div>
+                            <div class="col-md-6">
+                                <label for="">Trending</label>
+                                <input type="checkbox" name="trending"
+                                    <?= $product['trending'] == 1 ? 'checked' : '' ?>>
+                            </div>
                             <div class="col-md-12">
                                 <label for="">Meta Title</label>
                                 <input type="text" name="meta_title" value="<?= $product['meta_title'] ?>"
