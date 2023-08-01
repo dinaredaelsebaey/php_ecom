@@ -5,12 +5,14 @@ include("config/userDb.php");
 $database =new Database();
 $conn = $database->getConnection();
 
-$category_table="categories" ;
-$category_slug= $_GET['category'];
-$category_data = getActiveSlugCategory($category_table,$category_slug);
-$category = mysqli_fetch_array($category_data);
-$category_id = $category['id'];
-?>
+if(isset($_GET['category'])){
+    
+    $category_table="categories" ;
+    $category_slug= $_GET['category'];
+    $category_data = getActiveSlug($category_table,$category_slug);
+    $category = mysqli_fetch_array($category_data);
+    $category_id = $category['id'];
+        ?>
 <div class="py-3 bg-primary">
     <div class="container">
         <h6 class="text-white">
@@ -32,16 +34,16 @@ $category_id = $category['id'];
                 <div class="row">
                     <hr>
                     <?php
-                
-                $products=getProductByCategoryId($category_id);
-                if (count($products)> 0)
-                {
-                    foreach($products as $product)
-                    {
-                    ?>
+                        
+                        $products=getProductByCategoryId($category_id);
+                        if (count($products)> 0)
+                        {
+                            foreach($products as $product)
+                            {
+                            ?>
 
                     <div class="col-md-3 mb-2">
-                        <a href="#">
+                        <a href="userProductDetails.php?product=<?= $product["slug"];?>">
                             <div class="card shadow">
                                 <div class="card-body">
                                     <img src="admin/upload/<?= $product["image"];?>" class="w-100"
@@ -53,17 +55,22 @@ $category_id = $category['id'];
                         </a>
                     </div>
                     <?php
-                    }
-                }else{
-                    echo "Data not available";
-                }
-            ?>
+                            }
+                        }else{
+                            echo "Data not available";
+                        }
+                    ?>
                 </div>
             </div>
         </div>
     </div>
 </div>
 </div>
+<?php
+}else{
+    echo "some thing went wrong";
+}
+            ?>
 
 
 

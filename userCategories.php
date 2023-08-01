@@ -16,7 +16,7 @@ $conn = $database->getConnection();
             <div class="col-md-12">
                 <h1>Our Collections</h1>
                 <hr>
-                <div class="row">
+                <div class="row d-flex justify-content-center align-items-center">
                     <?php
                 $categories_table="categories" ;
                 $categories =getActiveCategory($categories_table);
@@ -26,12 +26,13 @@ $conn = $database->getConnection();
                     {
                     ?>
 
-                    <div class="col-md-3 mb-2">
-                        <a href="userProducts.php?category=<?= $category["slug"];?>">
+                    <div class="col-md-3 d-flex flex-column justify-content-center align-items-center  mb-2"
+                        Style="gap:10px">
+                        <a href=" userProducts.php?category=<?= $category["slug"];?>">
                             <div class="card shadow">
                                 <div class="card-body">
-                                    <img src="admin/upload/<?= $category["image"];?>" class="w-100"
-                                        alt="<?= $category["name"]; ?>">
+                                    <img src="admin/upload/<?= $category["image"];?>" width="50px"
+                                        alt=" <?=  $category["name"]; ?>">
                                     <h4 class="text-center"><?= $category["name"]; ?></h4>
                                 </div>
                             </div>

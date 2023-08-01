@@ -16,7 +16,7 @@ function getActiveCategoryId($table,$id)
     $sql = "SELECT * FROM $table WHERE id = '$id' AND status = '1' ";
     return $result = mysqli_query($conn, $sql);
 }
-function getActiveSlugCategory($table,$slug)
+function getActiveSlug($table,$slug)
 {
     global $conn ;
     $sql = "SELECT * FROM $table WHERE slug = '$slug' AND status = '1' LIMIT 1";

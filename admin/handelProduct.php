@@ -95,8 +95,8 @@ class Product
     $status_value = $status ? 1 : 0;
     $trending = isset($_POST['trending']) ? boolval($_POST['trending']) : false;
     $trending_value = $status ? 1 : 0;
-    $original_price = mysqli_real_escape_string($conn, $this->original_price);
-    $selling_price = mysqli_real_escape_string($conn, $this->selling_price);
+    $selling_price = $_POST['selling_price'];
+    $original_price = $_POST['original_price'];
     $quantity = mysqli_real_escape_string($conn, strval($this->quantity));
     $meta_title = mysqli_real_escape_string($conn, $this->meta_title);
     $meta_description = mysqli_real_escape_string($conn, $this->meta_description);
